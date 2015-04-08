@@ -1,0 +1,15 @@
+require('./abc-util-getFile-test');
+require('./abc-util-setFile-test');
+require('./abc-util-getPath-test');
+require('./abc-util-setPath-test');
+require('./abc-util-extend-test');
+require('./abc-util-trim-test');
+require('./abc-util-getType-test');
+require('./abc-util-checkMime-test');
+require('./abc-util-md5-test');
+require('./abc-util-frename-test');
+require('./abc-mod-convert2opt-test');
+require('./abc-mod-createTask-test');
+require('./abc-mod-operateCssObj-test');
+require('./abc-mod-createImg-test');
+require('./abc-main-test');

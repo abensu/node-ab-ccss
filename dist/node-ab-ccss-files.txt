@@ -1,0 +1,29 @@
+﻿/images/v-ele-1
+    /img/v-ele.png
+    /css/combine.css
+    {"type":"v-ele", "sep":0, "comment":"v-ele 注释||路径为/css/v-ele.css", "pre":"#v-ele", "css":"display:inline-block;", "minify-css":true, "minify-img":false}
+
+/images/h-ele-1
+    /img/h-ele.png
+    /css/combine.css
+    {"type":"h-ele", "sep":0, "comment":"h-ele 注释", "pre": "#h-ele"}
+
+/images/v-bg-1
+    /img/v-bg.png
+    /css/combine.css
+    {"type":"v-bg", "sep":0, "comment":"v-bg 注释", "pre": "#v-bg"}
+
+/images/h-bg-1
+    /img/h-bg.png
+    /css/combine.css
+    {"type":"h-bg", "sep":0, "comment":"h-bg 注释", "pre": "#h-bg"}
+
+/images/v-box-1
+    /img/v-box.png
+    /css/combine.css
+    {"type":"v-box", "sep":0, "comment":"v-box 注释"}
+
+/images/h-box-1
+    /img/h-box.png
+    /css/combine.css
+    {"type":"h-box", "sep":0, "comment":"h-box 注释"}

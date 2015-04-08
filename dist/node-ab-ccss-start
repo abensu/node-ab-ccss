@@ -1,0 +1,6 @@
+#! /bin/sh
+
+filepath=$(cd "$(dirname "$0")"; pwd)
+
+cd $filepath
+node node-ab-ccss

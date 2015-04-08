@@ -1,0 +1,9 @@
+﻿/src/images/class1
+    /to/images/class1.png
+    /to/css/class1.css
+	{"key1": "word1"}
+
+/src/images/class2
+    /to/images/class2.png
+    /to/css/class2.css
+	{"key2": "word2"}

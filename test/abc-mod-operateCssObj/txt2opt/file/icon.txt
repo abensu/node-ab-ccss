@@ -1,0 +1,25 @@
+after
+	$self
+    :link
+	:visited
+	:hover
+	::eq(1)
+	:after
+	[hello="123"]
+
+css
+	color:#999;
+	-moz-text-over:hidden
+	hello:7 0px
+
+pre
+	input
+	.hello
+	#hhh
+
+extend
+	.btn_s2:hover
+	#hellllll .btn_s3:hover
+
+pos
+	middle

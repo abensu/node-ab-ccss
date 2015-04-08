@@ -1,0 +1,61 @@
+#v-ele .icon_leaf,#v-ele .icon_mail_green,#v-ele .icon_num_red {background:url(../images/v-ele.png) no-repeat;}#v-ele .icon_leaf {display:inline-block;width:26px;height:27px;background-position:0 -0px;}#v-ele .icon_mail_green {display:inline-block;width:12px;height:9px;background-position:0 -27px;}#v-ele .icon_num_red {display:inline-block;width:17px;height:17px;background-position:0 -36px;}
+
+
+/**
+ * h-ele 注释
+ */
+
+#h-ele .icon_leaf,
+#h-ele .icon_mail_green,
+#h-ele .icon_num_red {background:url(../images/h-ele-1e07bfe2cb09b0fa19f6645d7c60a2cc.png?v=20150305174440) no-repeat;}
+#h-ele .icon_leaf {width:26px;height:27px;background-position:-0px 0;}
+#h-ele .icon_mail_green {width:12px;height:9px;background-position:-26px 0;}
+#h-ele .icon_num_red {width:17px;height:17px;background-position:-38px 0;}
+
+
+/**
+ * v-bg 注释
+ */
+
+#v-bg .bg_gass,
+#v-bg .bg_glass_sep,
+#v-bg .bg_tab {background:url(../images/v-bg.png) repeat-y;}
+#v-bg .bg_gass {background-position:-0px 0;max-width:75px;}
+#v-bg .bg_glass_sep {background-position:-75px 0;max-width:20px;}
+#v-bg .bg_tab {background-position:-95px 0;max-width:240px;}
+
+
+/**
+ * h-bg 注释
+ */
+
+#h-bg .bg_gass,
+#h-bg .bg_glass_sep,
+#h-bg .bg_tab {background:url(../images/h-bg.png) repeat-x;}
+#h-bg .bg_gass {background-position:0 -0px;min-height:75px;}
+#h-bg .bg_glass_sep {background-position:0 -75px;min-height:34px;}
+#h-bg .bg_tab {background-position:0 -109px;min-height:116px;}
+
+
+/**
+ * v-box 注释
+ */
+
+.indexSideBox,
+.indexSideBox_box,
+.indexSideBox_inner {background:url(../images/v-box.png);}
+.indexSideBox {width:56px;background-repeat:no-repeat;background-position:-0px 0;padding-top:30px;}
+.indexSideBox_box {background-repeat:repeat-y;background-position:-56px 0;width:56px;}
+.indexSideBox_inner {background-repeat:no-repeat;background-position:-112px bottom;width:56px;padding-bottom:31px;}
+
+
+/**
+ * h-box 注释
+ */
+
+.indexHeadBox,
+.indexHeadBox_box,
+.indexHeadBox_inner {background:url(../images/h-box.png);}
+.indexHeadBox {height:56px;background-repeat:no-repeat;background-position:0 -0px;padding-left:30px;}
+.indexHeadBox_box {background-repeat:repeat-x;background-position:0 -56px;height:56px;}
+.indexHeadBox_inner {background-repeat:no-repeat;background-position:right -112px;height:56px;padding-right:31px;}

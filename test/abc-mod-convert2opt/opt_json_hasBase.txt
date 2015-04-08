@@ -1,0 +1,19 @@
+{
+    "base" : {
+        "key" : "word"
+    },
+    "list" : [
+        {
+            "fold"  : "/src/images/class1",
+            "img"   : "/to/images/class1.png",
+            "css"   : "/to/css/class1.css",
+            "opt"   : {"key1": "word1"}
+        },
+        {
+            "fold"  : "/src/images/class2",
+            "img"   : "/to/images/class2.png",
+            "css"   : "/to/css/class2.css",
+            "opt"   : {"key2": "word2"}
+        }
+    ]
+}

@@ -1,0 +1,17 @@
+{
+  "name": "node-ab-ccss-test",
+  "version": "0.0.1",
+  "description": "测试用例（使用前必须确定已全局安装 mocha）",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha index"
+  },
+  "dependencies": {
+    "chai": "*"
+  },
+  "keywords": [
+    "test"
+  ],
+  "author": "aben",
+  "license": "mit"
+}

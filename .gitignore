@@ -1,0 +1,5 @@
+﻿test/abc-main/css
+test/abc-main/images
+test/abc-util-setPath/*
+test/abc-util-setFile/*
+test/node_modules
