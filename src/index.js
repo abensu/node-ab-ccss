@@ -54,8 +54,7 @@ function main() {
 
                 var 
                     __txtObj,
-                    __taskList,
-                    __baseOpt;
+                    __taskList;
 
                 if (typeof _baseOpt.include[_i] === "object") {
 
@@ -70,30 +69,31 @@ function main() {
                     throw "ERROR: main: 基础参数的 include 的数据类型不被支持 <- " + (typeof _baseOpt.include);
                 }
 
-                // 当 include 的文件不存在时，__txtObj 为 null
-                if (__txtObj === null) {
+                // 当 include 的子文件或对象不存在时，执行下一轮
+                if (!__txtObj.list.length) {
 
                     continue;
                 }
 
-                __baseOpt   = ab_extend(_baseOpt, __txtObj.base);
-                __taskList  = __txtObj.list;
+                __taskList = __txtObj.list;
 
                 // TASKLIST 填充
                 for (var __i = 0, __len = __taskList.length; __i < __len; __i++) {
-                    ab_createTask(__baseOpt, __taskList[__i], TASKLIST);
+
+                    TASKLIST.push( ab_createTask(__taskList[__i], _baseOpt) );
                 }
             }
         }
 
         // TASKLIST 填充
         for (var i = 0, len = _taskList.length; i < len; i++) {
-            TASKLIST.push(ab_createTask(_taskList[i], _baseOpt));
+
+            TASKLIST.push( ab_createTask(_taskList[i], _baseOpt) );
         }
 
         // CSSOBJ 填充
         for (var i = 0, len = TASKLIST.length; i < len; i++) {
-            // ab_createImg(TASKLIST[i]); // 仅主程时可调用，不过比较费时
+
             ab_opteCssObj(TASKLIST[i], CSSOBJ);
         }
 
@@ -108,7 +108,11 @@ function main() {
                 _workerList.push(cluster.fork());
 
                 // 子程主控发布信息给子程（level 1）
-                _workerList[i].send({status: 1, taskListCell: TASKLIST[_clusterIndex], taskIndex: _clusterIndex});
+                _workerList[i].send({
+                    status          : 1,
+                    taskListCell    : TASKLIST[_clusterIndex],
+                    taskIndex       : _clusterIndex
+                });
 
                 // 子程主控处理 ab_createImg 子程（level 2）返回的信息
                 _workerList[i].on("message", function(msgOpt) {
@@ -119,15 +123,26 @@ function main() {
 
                     if (msgOpt.status === 2 && _clusterIndex < TASKLIST.length) {
 
-                        _workerList[i].send({status: 1, taskListCell: TASKLIST[_clusterIndex], taskIndex: _clusterIndex});
+                        _workerList[i].send({
+                            status          : 1,
+                            taskListCell    : TASKLIST[_clusterIndex],
+                            taskIndex       : _clusterIndex
+                        });
+
                         _clusterIndex ++;
 
                     } else {
 
-                        _workerList[i].send({status: 0});
+                        _workerList[i].send({
+                            status : 0
+                        });
+
                         _actCpusNum --;
 
-                        if (_actCpusNum === 0) { finish(_st); }
+                        if (_actCpusNum === 0) {
+
+                            finish(_st);
+                        }
                     }
                 });
 
@@ -148,7 +163,6 @@ function main() {
 
             if (msgOpt.status === 1 && !!msgOpt.taskListCell) {
 
-                // ab_createImg(TASKLIST[msgOpt.taskIndex]);
                 ab_createImg(msgOpt.taskListCell, msgOpt.taskIndex);
 
             } else {

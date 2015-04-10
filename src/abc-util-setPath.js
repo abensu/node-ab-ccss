@@ -6,19 +6,19 @@
 /**
  * 生成目录
  *
- * @example     : setPath(root, to, path, ...)
+ * @example : setPath(root, to, path, ...)
  *
  * @param {string} root|to|path : [] 目录字符串，如 "../", "css/"
  *
  * @return {object}             : [] json 数据
  *                                  |
- *                                  |- {number} "status": [] 状态
- *                                  |                       |- 1    : 目录已创建
- *                                  |                       `- 0    : 目录未创建
+ *                                  |- @node {number} status    : [] 状态
+ *                                  |                               |- 1 : 目录已创建
+ *                                  |                               `- 0 : 目录未创建
  *                                  |
- *                                  |- {string} "msg"   : [] 提示信息
+ *                                  |- @node {string} msg       : [] 提示信息
  *                                  |
- *                                  `- {string} "data"  : [] 目录路径或为错误信息
+ *                                  `- @node {string} data      : [] 目录路径或为错误信息
  */
 
 exports.setPath = function() {

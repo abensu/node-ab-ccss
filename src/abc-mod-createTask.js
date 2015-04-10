@@ -31,7 +31,9 @@ exports.preOpt2IdPreOpt = preOpt2IdPreOpt = function(srcStr, idName) {
     return srcStr.replace(/\{\$[^{}]+\}/g, function(str) {
 
         var
-            __name      = str.replace(/^\{\s*/, '').replace(/\s*\}$/, ''),
+            __name      = str
+                            .replace(/^\{\s*/, '')
+                            .replace(/\s*\}$/, ''),
             __isSupport = __name in ab_optPreOpt,
             __newStr    = __isSupport ? "{" + idName + "@" + __name + "}" : str;
 
@@ -66,16 +68,20 @@ exports.createTask = function(taskOpt, baseOpt) {
         _files      = [],               // 指定文件夹中的文件列表
         _re_fName   = /[^\/\\]+?$/,     // 路径中，最末的文件名
         _re_lastSep = /[\\\/]+?$/,
-        _now       = new Date();;      // 去除完文件名后的最末的 "/" 或 "\"
+        _now        = new Date();;      // 去除完文件名后的最末的 "/" 或 "\"
 
     var __func_add0;
 
     _func_add0 = function(num) {
+
         return (num < 10 ? "0" : "") + num;
     };
 
     // （内部变量）id、时间
-    _taskOpt._dateRaw = _now.getTime();
+
+    _taskOpt._dateRaw
+        = _now.getTime();
+
     _taskOpt._dateNow
         = ""
         + _now.getFullYear()
@@ -84,7 +90,12 @@ exports.createTask = function(taskOpt, baseOpt) {
         + _func_add0(_now.getHours())
         + _func_add0(_now.getMinutes())
         + _func_add0(_now.getSeconds());
-    _taskOpt._id = _taskOpt._dateRaw + Math.random().toString(16).replace(/^0\./, "");
+
+    _taskOpt._id
+        = _taskOpt._dateRaw
+        + Math.random()
+            .toString(16)
+            .replace(/^0\./, "");
 
     // img 和 css 的路径值中的预处理变量进行处理（如 "{$now}" -> "{nnn:$now}"）
     _taskOpt.img = preOpt2IdPreOpt(_taskOpt.img, _taskOpt._id);
@@ -110,7 +121,7 @@ exports.createTask = function(taskOpt, baseOpt) {
     _taskOpt.cssFold = _taskOpt.css.replace(_re_fName, '').replace(_re_lastSep, '');
 
     // 退出 <- 仅支持 png 或 jpg 输出
-    if (!_taskOpt.img.match(/\.(png|jpg)$/i)) {
+    if ( !_taskOpt.img.match(/\.(png|jpg)$/i) ) {
 
         throw "WARM: createTask: 仅支持 png 或 jpg 输出 <- " + _taskOpt.img;
     }
@@ -153,9 +164,16 @@ exports.createTask = function(taskOpt, baseOpt) {
             __img       = images(__imgPath);
             __imgW      = __img.width(),
             __imgH      = __img.height(),
-            __name      = _files[i].replace(/\.(jpg|png|gif)$/i, ''),   // 去掉后缀（.jpg | .png | .gif）的文件名
-            __cssOptStr = (/#/.test(__name)) ? __name.replace(/^[^#]*?#/, '') : '',
-            __cName     = __name.replace(__cssOptStr, '').replace(/^\d+[\s]*/g,'').replace("#",'').replace(/[ ]+/g, '_');
+            __name      = _files[i]
+                            .replace(/\.(jpg|png|gif)$/i, ''),   // 去掉后缀（.jpg | .png | .gif）的文件名
+            __cssOptStr = (/#/.test(__name)) ?
+                            __name.replace(/^[^#]*?#/, '') :
+                            '' ,
+            __cName     = __name
+                            .replace(__cssOptStr, '')
+                            .replace(/^\d+[\s]*/g,'')
+                            .replace("#",'')
+                            .replace(/[ ]+/g, '_');
 
         // 不添加到操作列表中 <- 文件名前缀为 #
         if (/^#/.test(__name)) {

@@ -3,11 +3,13 @@
 
 ## 简介
 
-本程序用于生成 css-sprite （图片精灵）的图片合成和生成对应 css 文件
+1. 本程序用于 css-sprite （图片精灵）的图片合成和对应 css 文件生成
 
-提倡**傻瓜式**的用法，使用详情请查看 [demo 用例](https://github.com/abensu/node-ab-ccss/tree/master/demo)
+1. 提倡**傻瓜式**的用法，使用详情请查看 [Step01：开始使用](https://github.com/abensu/node-ab-ccss/blob/master/doc/010101.md)
 
-**适合团队或个人开发的任何阶段**
+1. **适合团队或个人开发的任何阶段**
+
+[项目链接](https://github.com/abensu/node-ab-ccss)
 
 
 ## 依赖
@@ -15,16 +17,11 @@
 [images](https://github.com/zhangyuanwei/node-images)
 
 
-## 安装
+## 安装（建议参考 demo 的安装方式）
 
 ```
 npm install node-ab-ccss
 ```
-
-
-## 操作文件及其参数说明
-
-请查看 demo 的 [README](https://github.com/abensu/node-ab-ccss/tree/master/demo) 说明
 
 
 ## 版权

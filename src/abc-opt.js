@@ -1,4 +1,4 @@
-// 参数-普通任务（首字母为下划线的为内部使用的变量，不能使用）
+// 参数-普通任务
 exports.opt_task =
 {
     "root"          : "",       // 根目录路径
@@ -20,6 +20,9 @@ exports.opt_task =
     "maxHeight"     : 0,        // 图片集合的最大高度
     "totalWidth"    : 0,        // 图片集合的总宽度
     "totalHeight"   : 0,        // 图片集合的总高度
+
+    // 以下为内部使用的变量，不建议使用
+
     "_id"           : "",       // 唯一标示符（_dateRaw + 16 bit 的随机值），如 “1425477666750a97f955c5f375”
     "_dateRaw"      : 0,        // 当前日期，如 1425477666750
     "_dateNow"      : "",       // 当前日期，如 “20150102103000”
@@ -41,7 +44,9 @@ exports.opt_options =
     "quality-img"   : 100,      // 图片的质量，100 为 100% 质量输出（暂只支持 jpg 压缩）
     "bgColor-img"   : "",       // 图片的背景色（格式为 rgba），取值如 "255, 0, 0, 1", "0xff, 0xff, 0xff, 0"
     "mutilExportImg": "",       // 生成额外类型的图片，取值如 "image.jpg", ["image.png", "image.jpg"]
-    "include"       : ""        // 嵌套对象，与 opt_options 一致
+    "include"       : ""        // 引入外部文件或对象的列表
+                                // 元素为对象时，其结构为 abc-mod-convert2opt::txt2opt 返回的值
+                                // 元素为文件时，其为路径
 };
 
 // 参数-预处理参数支持的判断（其值与 opt_task 的 key 进行挂钩）

@@ -1,0 +1,4 @@
+﻿../abc-test-src/h-box
+    /images/h-box.png
+    /css/ccss.css
+    {"type":"h-box", "sep":0, "comment":"h-box 注释"}

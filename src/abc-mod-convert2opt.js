@@ -9,8 +9,8 @@
 /**
  * 将目录文本转换成处理对象
  *
- * @use；
- *      json2opt(root, path1, path2, ...)
+ * @use {function} txt2opt(root)
+ * @use {function} txt2opt(root, path1, path2, ...)
  *
  * @param {string} root     : [] 根目录
  * @param {string} path(n)  : [] 目录/文件名（第 1 个之后的参数）
@@ -41,12 +41,13 @@ exports.txt2opt = function(root) {
     }
 
     var
-        _fileData   = fs.readFileSync(ab_trim(_filePath), {encoding:"utf-8"}),
+        _fileData   = fs.readFileSync( ab_trim(_filePath), {encoding:"utf-8"} ),
         _fileslist  = _fileData.split(/\r\r|\n\n|\r\n\r\n(?:\s*)/g),
         _listObj    = [],
         _base       = {},
         _fileroot   = arguments[0];
 
+    // 头部对象 '{"include":["url1","url2"]}'
     if (/^{/.test(ab_trim(_fileslist[0]))) {
 
         _base = JSON.parse(ab_trim(_fileslist[0]));
@@ -82,9 +83,8 @@ exports.txt2opt = function(root) {
 /**
  * json 转换成处理对象
  *
- * @use；
- *      json2opt(root, json)
- *      json2opt(root, path1, path2, ...)
+ * @example : json2opt(root, json)
+ * @example : json2opt(root, path1, path2, ...)
  *
  * @param {string} root     : [] 根目录
  * @param {object} json     : [] json 对象（第2个参数）

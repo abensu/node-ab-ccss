@@ -18,7 +18,7 @@ describe('abc-mod-operateCssObj', function() {
                 _tarObj = { pos: 'middle' },
                 _reObj  = testTar._txt2opt(_task, '', {});
 
-            expect(_reObj).to.eql(_reObj);
+            expect(_reObj).to.eql(_tarObj);
         });
 
         it('文件名内联内容: 失败: 属性值对不被支持: css=display:block', function() {
@@ -58,7 +58,34 @@ describe('abc-mod-operateCssObj', function() {
         });
     });
 
-    describe('2、6 种类型（节点 img 和 css 都不带 {xxx} 参数）', function() {
+    describe('2、同图多 class', function() {
+
+        var _root = path.join(__dirname, 'abc-mod-operateCssObj');
+
+        it('文档文件: 成功: 文件名支持 &&', function() {
+
+            var
+                _taskOpt    = {
+                                    "root"  : _root,
+                                    "fold"  : path.join(_root, "morename"),
+                                    "img"   : path.join(_root, "images/v-ele.png"),
+                                    "css"   : path.join(_root, "css/ccss.css"),
+                                    "opt"   : {"type": "v-ele"}
+                                },
+                _cssObj     = {},
+                _lstTask    = ab_cTask.createTask(_taskOpt),
+                _tarOpt     = '.class1,\r\n.class2,\r\n.class3 {background:url(../images/v-ele.png) no-repeat;}\r\n.class1,\r\n.class2,\r\n.class3 {width:75px;height:75px;background-position:0 -0px;}',
+                _name       = _taskOpt.css;
+
+            testTar.operateCssObj(_lstTask, _cssObj);
+
+            expect(_cssObj[_name]).to.equal(_tarOpt);
+            // console.dir(_lstTask);
+            // console.dir(_cssObj);
+        });
+    });
+
+    describe('3、6 种类型（节点 img 和 css 都不带 {xxx} 参数）', function() {
 
         var _root = path.join(__dirname, 'abc-mod-operateCssObj');
 
@@ -162,7 +189,7 @@ describe('abc-mod-operateCssObj', function() {
                                 },
                 _cssObj     = {},
                 _lstTask    = ab_cTask.createTask(_taskOpt),
-                _tarOpt     = '.indexSideBox,\r\n.indexSideBox_box,\r\n.indexSideBox_inner {background:url(../images/v-box.png);}\r\n.indexSideBox {width:56px;background-repeat:no-repeat;background-position:-0px 0;padding-top:30px;}\r\n.indexSideBox_box {background-repeat:repeat-y;background-position:-56px 0;width:56px;}\r\n.indexSideBox_inner {background-repeat:no-repeat;background-position:-112px bottom;width:56px;padding-bottom:31px;}',
+                _tarOpt     = '.indexSideBox,\r\n.indexSideBox_box,\r\n.indexSideBox_inner {background:url(../images/v-box.png) no-repeat;}\r\n.indexSideBox {width:56px;background-position:-0px 0;padding-top:30px;}\r\n.indexSideBox_box {background-position:-56px 0;width:56px;background-repeat:repeat-y;}\r\n.indexSideBox_inner {background-position:-112px bottom;width:56px;padding-bottom:31px;}',
                 _name       = _taskOpt.css;
 
             testTar.operateCssObj(_lstTask, _cssObj);
@@ -184,7 +211,7 @@ describe('abc-mod-operateCssObj', function() {
                                 },
                 _cssObj     = {},
                 _lstTask    = ab_cTask.createTask(_taskOpt),
-                _tarOpt     = '.indexHeadBox,\r\n.indexHeadBox_box,\r\n.indexHeadBox_inner {background:url(../images/h-box.png);}\r\n.indexHeadBox {height:56px;background-repeat:no-repeat;background-position:0 -0px;padding-left:30px;}\r\n.indexHeadBox_box {background-repeat:repeat-x;background-position:0 -56px;height:56px;}\r\n.indexHeadBox_inner {background-repeat:no-repeat;background-position:right -112px;height:56px;padding-right:31px;}',
+                _tarOpt     = '.indexHeadBox,\r\n.indexHeadBox_box,\r\n.indexHeadBox_inner {background:url(../images/h-box.png) no-repeat;}\r\n.indexHeadBox {height:56px;background-position:0 -0px;padding-left:30px;}\r\n.indexHeadBox_box {background-position:0 -56px;height:56px;background-repeat:repeat-x;}\r\n.indexHeadBox_inner {background-position:right -112px;height:56px;padding-right:31px;}',
                 _name       = _taskOpt.css;
 
             testTar.operateCssObj(_lstTask, _cssObj);
@@ -242,7 +269,7 @@ describe('abc-mod-operateCssObj', function() {
                                     }
                                 ],
                 _cssObj     = {},
-                _tarOpt     = '.icon_leaf,\r\n.icon_mail_green,\r\n.icon_num_red {background:url(../images/v-ele.png) no-repeat;}\r\n.icon_leaf {width:26px;height:27px;background-position:0 -0px;}\r\n.icon_mail_green {width:12px;height:9px;background-position:0 -27px;}\r\n.icon_num_red {width:17px;height:17px;background-position:0 -36px;}\r\n\r\n\r\n.icon_leaf,\r\n.icon_mail_green,\r\n.icon_num_red {background:url(../images/h-ele.png) no-repeat;}\r\n.icon_leaf {width:26px;height:27px;background-position:-0px 0;}\r\n.icon_mail_green {width:12px;height:9px;background-position:-26px 0;}\r\n.icon_num_red {width:17px;height:17px;background-position:-38px 0;}\r\n\r\n\r\n.bg_gass,\r\n.bg_glass_sep,\r\n.bg_tab {background:url(../images/v-bg.png) repeat-y;}\r\n.bg_gass {background-position:-0px 0;max-width:75px;}\r\n.bg_glass_sep {background-position:-75px 0;max-width:20px;}\r\n.bg_tab {background-position:-95px 0;max-width:240px;}\r\n\r\n\r\n.bg_gass,\r\n.bg_glass_sep,\r\n.bg_tab {background:url(../images/h-bg.png) repeat-x;}\r\n.bg_gass {background-position:0 -0px;min-height:75px;}\r\n.bg_glass_sep {background-position:0 -75px;min-height:34px;}\r\n.bg_tab {background-position:0 -109px;min-height:116px;}\r\n\r\n\r\n.indexSideBox,\r\n.indexSideBox_box,\r\n.indexSideBox_inner {background:url(../images/v-box.png);}\r\n.indexSideBox {width:56px;background-repeat:no-repeat;background-position:-0px 0;padding-top:30px;}\r\n.indexSideBox_box {background-repeat:repeat-y;background-position:-56px 0;width:56px;}\r\n.indexSideBox_inner {background-repeat:no-repeat;background-position:-112px bottom;width:56px;padding-bottom:31px;}\r\n\r\n\r\n.indexHeadBox,\r\n.indexHeadBox_box,\r\n.indexHeadBox_inner {background:url(../images/h-box.png);}\r\n.indexHeadBox {height:56px;background-repeat:no-repeat;background-position:0 -0px;padding-left:30px;}\r\n.indexHeadBox_box {background-repeat:repeat-x;background-position:0 -56px;height:56px;}\r\n.indexHeadBox_inner {background-repeat:no-repeat;background-position:right -112px;height:56px;padding-right:31px;}',
+                _tarOpt     = '.icon_leaf,\r\n.icon_mail_green,\r\n.icon_num_red {background:url(../images/v-ele.png) no-repeat;}\r\n.icon_leaf {width:26px;height:27px;background-position:0 -0px;}\r\n.icon_mail_green {width:12px;height:9px;background-position:0 -27px;}\r\n.icon_num_red {width:17px;height:17px;background-position:0 -36px;}\r\n\r\n\r\n.icon_leaf,\r\n.icon_mail_green,\r\n.icon_num_red {background:url(../images/h-ele.png) no-repeat;}\r\n.icon_leaf {width:26px;height:27px;background-position:-0px 0;}\r\n.icon_mail_green {width:12px;height:9px;background-position:-26px 0;}\r\n.icon_num_red {width:17px;height:17px;background-position:-38px 0;}\r\n\r\n\r\n.bg_gass,\r\n.bg_glass_sep,\r\n.bg_tab {background:url(../images/v-bg.png) repeat-y;}\r\n.bg_gass {background-position:-0px 0;max-width:75px;}\r\n.bg_glass_sep {background-position:-75px 0;max-width:20px;}\r\n.bg_tab {background-position:-95px 0;max-width:240px;}\r\n\r\n\r\n.bg_gass,\r\n.bg_glass_sep,\r\n.bg_tab {background:url(../images/h-bg.png) repeat-x;}\r\n.bg_gass {background-position:0 -0px;min-height:75px;}\r\n.bg_glass_sep {background-position:0 -75px;min-height:34px;}\r\n.bg_tab {background-position:0 -109px;min-height:116px;}\r\n\r\n\r\n.indexSideBox,\r\n.indexSideBox_box,\r\n.indexSideBox_inner {background:url(../images/v-box.png) no-repeat;}\r\n.indexSideBox {width:56px;background-position:-0px 0;padding-top:30px;}\r\n.indexSideBox_box {background-position:-56px 0;width:56px;background-repeat:repeat-y;}\r\n.indexSideBox_inner {background-position:-112px bottom;width:56px;padding-bottom:31px;}\r\n\r\n\r\n.indexHeadBox,\r\n.indexHeadBox_box,\r\n.indexHeadBox_inner {background:url(../images/h-box.png) no-repeat;}\r\n.indexHeadBox {height:56px;background-position:0 -0px;padding-left:30px;}\r\n.indexHeadBox_box {background-position:0 -56px;height:56px;background-repeat:repeat-x;}\r\n.indexHeadBox_inner {background-position:right -112px;height:56px;padding-right:31px;}',
                 _name       = _taskList[0].css;
 
             for (var _i = 0, _len = _taskList.length; _i < _len; _i++) {
@@ -258,7 +285,7 @@ describe('abc-mod-operateCssObj', function() {
         });
     });
 
-    describe('3、6 种类型（节点 img 和 css 都带 {$xxx} 参数）', function() {
+    describe('4、6 种类型（节点 img 和 css 都带 {$xxx} 参数）', function() {
 
         var _root = path.join(__dirname, 'abc-mod-operateCssObj');
 
@@ -367,7 +394,7 @@ describe('abc-mod-operateCssObj', function() {
                 _cssObj     = {},
                 _lstTask    = ab_cTask.createTask(_taskOpt),
                 _id         = _lstTask._id,
-                _tarOpt     = '.indexSideBox,\r\n.indexSideBox_box,\r\n.indexSideBox_inner {background:url(../images-{' + _id + '@$md5}/v-box{$noThisType}.png?v={' + _id + '@$now});}\r\n.indexSideBox {width:56px;background-repeat:no-repeat;background-position:-0px 0;padding-top:30px;}\r\n.indexSideBox_box {background-repeat:repeat-y;background-position:-56px 0;width:56px;}\r\n.indexSideBox_inner {background-repeat:no-repeat;background-position:-112px bottom;width:56px;padding-bottom:31px;}',
+                _tarOpt     = '.indexSideBox,\r\n.indexSideBox_box,\r\n.indexSideBox_inner {background:url(../images-{' + _id + '@$md5}/v-box{$noThisType}.png?v={' + _id + '@$now}) no-repeat;}\r\n.indexSideBox {width:56px;background-position:-0px 0;padding-top:30px;}\r\n.indexSideBox_box {background-position:-56px 0;width:56px;background-repeat:repeat-y;}\r\n.indexSideBox_inner {background-position:-112px bottom;width:56px;padding-bottom:31px;}',
                 _name       = _taskOpt.css.replace("{$md5}", "{" + _id + "@$md5}");
 
             testTar.operateCssObj(_lstTask, _cssObj);
@@ -390,7 +417,7 @@ describe('abc-mod-operateCssObj', function() {
                 _cssObj     = {},
                 _lstTask    = ab_cTask.createTask(_taskOpt),
                 _id         = _lstTask._id,
-                _tarOpt     = '.indexHeadBox,\r\n.indexHeadBox_box,\r\n.indexHeadBox_inner {background:url(../images-{' + _id + '@$md5}/h-box{$noThisType}.png?v={' + _id + '@$now});}\r\n.indexHeadBox {height:56px;background-repeat:no-repeat;background-position:0 -0px;padding-left:30px;}\r\n.indexHeadBox_box {background-repeat:repeat-x;background-position:0 -56px;height:56px;}\r\n.indexHeadBox_inner {background-repeat:no-repeat;background-position:right -112px;height:56px;padding-right:31px;}',
+                _tarOpt     = '.indexHeadBox,\r\n.indexHeadBox_box,\r\n.indexHeadBox_inner {background:url(../images-{' + _id + '@$md5}/h-box{$noThisType}.png?v={' + _id + '@$now}) no-repeat;}\r\n.indexHeadBox {height:56px;background-position:0 -0px;padding-left:30px;}\r\n.indexHeadBox_box {background-position:0 -56px;height:56px;background-repeat:repeat-x;}\r\n.indexHeadBox_inner {background-position:right -112px;height:56px;padding-right:31px;}',
                 _name       = _taskOpt.css.replace("{$md5}", "{" + _id + "@$md5}");
 
             testTar.operateCssObj(_lstTask, _cssObj);
@@ -449,7 +476,7 @@ describe('abc-mod-operateCssObj', function() {
                                 ],
                 _cssObj     = {},
                 // 下面字符串中的 "[n]" 是需要替换成 id 的
-                _tarOpt     = '.icon_leaf,\r\n.icon_mail_green,\r\n.icon_num_red {background:url(../images/v-ele.png?v={[0]@$md5}) no-repeat;}\r\n.icon_leaf {width:26px;height:27px;background-position:0 -0px;}\r\n.icon_mail_green {width:12px;height:9px;background-position:0 -27px;}\r\n.icon_num_red {width:17px;height:17px;background-position:0 -36px;}\r\n\r\n\r\n.icon_leaf,\r\n.icon_mail_green,\r\n.icon_num_red {background:url(../images/h-ele.png?v={[1]@$md5}) no-repeat;}\r\n.icon_leaf {width:26px;height:27px;background-position:-0px 0;}\r\n.icon_mail_green {width:12px;height:9px;background-position:-26px 0;}\r\n.icon_num_red {width:17px;height:17px;background-position:-38px 0;}\r\n\r\n\r\n.bg_gass,\r\n.bg_glass_sep,\r\n.bg_tab {background:url(../images/v-bg.png?v={[2]@$md5}) repeat-y;}\r\n.bg_gass {background-position:-0px 0;max-width:75px;}\r\n.bg_glass_sep {background-position:-75px 0;max-width:20px;}\r\n.bg_tab {background-position:-95px 0;max-width:240px;}\r\n\r\n\r\n.bg_gass,\r\n.bg_glass_sep,\r\n.bg_tab {background:url(../images/h-bg.png?v={[3]@$md5}) repeat-x;}\r\n.bg_gass {background-position:0 -0px;min-height:75px;}\r\n.bg_glass_sep {background-position:0 -75px;min-height:34px;}\r\n.bg_tab {background-position:0 -109px;min-height:116px;}\r\n\r\n\r\n.indexSideBox,\r\n.indexSideBox_box,\r\n.indexSideBox_inner {background:url(../images/v-box.png?v={[4]@$md5});}\r\n.indexSideBox {width:56px;background-repeat:no-repeat;background-position:-0px 0;padding-top:30px;}\r\n.indexSideBox_box {background-repeat:repeat-y;background-position:-56px 0;width:56px;}\r\n.indexSideBox_inner {background-repeat:no-repeat;background-position:-112px bottom;width:56px;padding-bottom:31px;}\r\n\r\n\r\n.indexHeadBox,\r\n.indexHeadBox_box,\r\n.indexHeadBox_inner {background:url(../images/h-box.png?v={[5]@$md5});}\r\n.indexHeadBox {height:56px;background-repeat:no-repeat;background-position:0 -0px;padding-left:30px;}\r\n.indexHeadBox_box {background-repeat:repeat-x;background-position:0 -56px;height:56px;}\r\n.indexHeadBox_inner {background-repeat:no-repeat;background-position:right -112px;height:56px;padding-right:31px;}',
+                _tarOpt     = '.icon_leaf,\r\n.icon_mail_green,\r\n.icon_num_red {background:url(../images/v-ele.png?v={[0]@$md5}) no-repeat;}\r\n.icon_leaf {width:26px;height:27px;background-position:0 -0px;}\r\n.icon_mail_green {width:12px;height:9px;background-position:0 -27px;}\r\n.icon_num_red {width:17px;height:17px;background-position:0 -36px;}\r\n\r\n\r\n.icon_leaf,\r\n.icon_mail_green,\r\n.icon_num_red {background:url(../images/h-ele.png?v={[1]@$md5}) no-repeat;}\r\n.icon_leaf {width:26px;height:27px;background-position:-0px 0;}\r\n.icon_mail_green {width:12px;height:9px;background-position:-26px 0;}\r\n.icon_num_red {width:17px;height:17px;background-position:-38px 0;}\r\n\r\n\r\n.bg_gass,\r\n.bg_glass_sep,\r\n.bg_tab {background:url(../images/v-bg.png?v={[2]@$md5}) repeat-y;}\r\n.bg_gass {background-position:-0px 0;max-width:75px;}\r\n.bg_glass_sep {background-position:-75px 0;max-width:20px;}\r\n.bg_tab {background-position:-95px 0;max-width:240px;}\r\n\r\n\r\n.bg_gass,\r\n.bg_glass_sep,\r\n.bg_tab {background:url(../images/h-bg.png?v={[3]@$md5}) repeat-x;}\r\n.bg_gass {background-position:0 -0px;min-height:75px;}\r\n.bg_glass_sep {background-position:0 -75px;min-height:34px;}\r\n.bg_tab {background-position:0 -109px;min-height:116px;}\r\n\r\n\r\n.indexSideBox,\r\n.indexSideBox_box,\r\n.indexSideBox_inner {background:url(../images/v-box.png?v={[4]@$md5}) no-repeat;}\r\n.indexSideBox {width:56px;background-position:-0px 0;padding-top:30px;}\r\n.indexSideBox_box {background-position:-56px 0;width:56px;background-repeat:repeat-y;}\r\n.indexSideBox_inner {background-position:-112px bottom;width:56px;padding-bottom:31px;}\r\n\r\n\r\n.indexHeadBox,\r\n.indexHeadBox_box,\r\n.indexHeadBox_inner {background:url(../images/h-box.png?v={[5]@$md5}) no-repeat;}\r\n.indexHeadBox {height:56px;background-position:0 -0px;padding-left:30px;}\r\n.indexHeadBox_box {background-position:0 -56px;height:56px;background-repeat:repeat-x;}\r\n.indexHeadBox_inner {background-position:right -112px;height:56px;padding-right:31px;}',
                 _name       = _taskList[0].css;
 
             for (var _i = 0, _len = _taskList.length; _i < _len; _i++) {

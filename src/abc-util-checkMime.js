@@ -26,6 +26,7 @@ exports.checkMime = function(filename, filetype) {
 
     // 参数不等于 2 个就报错
     if (arguments.length !== 2) {
+
         throw "请传入两个参数：checkMime(filename, filetype)";
     }
 
@@ -145,16 +146,20 @@ exports.checkMime = function(filename, filetype) {
         _fileCheckTypeLen;
 
     // 文件是否存在
-    if (!fs.existsSync(_filename)) {
+    if ( !fs.existsSync(_filename) ) {
+
         _reValObj.status = 0;
         _reValObj.value = "文件不存在 <-" + _filename;
+
         return _reValObj;
     }
 
     // 所检测的文件类型是否被支持
-    if (!(_filetype in _type2code)) {
+    if ( !(_filetype in _type2code) ) {
+
         _reValObj.status = 2;
         _reValObj.value = "不支持的文件检测类型 <-" + filetype;
+
         return _reValObj;
     }
 
@@ -168,30 +173,34 @@ exports.checkMime = function(filename, filetype) {
     // 判断检测类型列表是否存在二级数组，再进行对应的匹配处理
     if (typeof _type2code[_filetype][0] === "number") {
 
-        _fileCheckTypeLen = _type2code[_filetype].length;
-        _bufJSON = JSON.stringify(_fileBuffer.slice(0, _fileCheckTypeLen));
-        _bufObj = JSON.parse(_bufJSON);
-        _reValObj.status = 1;
-        _reValObj.value = (JSON.stringify(_bufObj.data) === JSON.stringify(_type2code[_filetype]));
+        _fileCheckTypeLen   = _type2code[_filetype].length;
+        _bufJSON            = JSON.stringify( _fileBuffer.slice(0, _fileCheckTypeLen) );
+        _bufObj             = JSON.parse(_bufJSON);
+        _reValObj.status    = 1;
+        _reValObj.value     = ( JSON.stringify(_bufObj.data) === JSON.stringify(_type2code[_filetype]) );
+
         return _reValObj;
 
     } else {
 
         for (var _i = 0, _len = _type2code[_filetype].length; _i < _len; _i++) {
 
-            _fileCheckTypeLen = _type2code[_filetype][_i].length;
-            _bufJSON = JSON.stringify(_fileBuffer.slice(0, _fileCheckTypeLen));
-            _bufObj = JSON.parse(_bufJSON);
+            _fileCheckTypeLen   = _type2code[_filetype][_i].length;
+            _bufJSON            = JSON.stringify(_fileBuffer.slice(0, _fileCheckTypeLen));
+            _bufObj             = JSON.parse(_bufJSON);
 
             if (JSON.stringify(_bufObj.data) === JSON.stringify(_type2code[_filetype][_i])) {
-                _reValObj.status = 1;
-                _reValObj.value = true;
+
+                _reValObj.status    = 1;
+                _reValObj.value     = true;
+
                 return _reValObj;
             }
         }
     }
 
-    _reValObj.status = 1;
-    _reValObj.value = false;
+    _reValObj.status    = 1;
+    _reValObj.value     = false;
+
     return _reValObj;
 };

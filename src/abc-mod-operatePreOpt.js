@@ -5,8 +5,8 @@ var
     ab_optPreOpt    = ab_model.opt_preOpt;
 
 var
-    _json       = {"status": 0, "data": "", "msg": ""},
-    _re_preOpt  = /\{\d+\w+@\$[^}]+\}/g;
+    _json           = {"status": 0, "data": "", "msg": ""},
+    _re_preOpt      = /\{\d+\w+@\$[^}]+\}/g;
 
 
 /**
@@ -18,19 +18,19 @@ var
  *
  * @return {object}             : [] json 数据
  *                                  |
- *                                  |- {number} "status": [] 状态
- *                                  |                       |- 1    : 修改成功/不需要修改
- *                                  |                       |- 0    : 修改失败：处理类型不存在 <- xxx
+ *                                  |- @node {number} status    : [] 状态
+ *                                  |                               |- 1 : 修改成功/不需要修改
+ *                                  |                               `- 0 : 修改失败：处理类型不存在 <- xxx
  *                                  |
- *                                  |- {string} "msg"   : [] 提示信息
+ *                                  |- @node {string} msg       : [] 提示信息
  *                                  |
- *                                  `- {string} "data"  : [ "" ] 修改后的内容
+ *                                  `- @node {string} data      : [ "" ] 修改后的内容
  */
 
 exports.operatePreOpt = function(type, pathOrtxt, tasklist) {
 
     // 先判断是否存在预处理变量（如 "{nnn@$now}"）
-    if (_re_preOpt.test(pathOrtxt)) {
+    if ( _re_preOpt.test(pathOrtxt) ) {
 
         var _paramObj = {};
 
@@ -55,7 +55,10 @@ exports.operatePreOpt = function(type, pathOrtxt, tasklist) {
                 __new = __new.replace(_re_preOpt, function(str) {
 
                     var
-                        ___val      = str.replace(/^\{/, "").replace(/\}$/, "").split("@"),
+                        ___val      = str
+                                        .replace(/^\{/, "")
+                                        .replace(/\}$/, "")
+                                        .split("@"),
                         ___id       = ___val[0],
                         ___preOpt   = ___val[1],
                         ___key      = ab_optPreOpt[___preOpt],

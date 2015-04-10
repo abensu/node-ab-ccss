@@ -9,24 +9,20 @@
     testTar         = require('../src/index'),
     ab_md5          = require('../src/abc-util-md5');
 
-describe('abc-main', function() {
+describe('abc-main-include', function() {
 
-    it('成功: 读取配置文件，生成图片与 css 文件', function(done) {
+    it('成功: 读取 include 指定的配置文件，生成图片与 css 文件', function(done) {
 
         var
-            _root       = "abc-main",
+            _root       = "abc-main-include",
             _cssPath    = path.join(_root, "css"),
             _imgPath    = path.join(_root, "images"),
             _pathAndMd5 = {
-                                "ccss.css"  : [path.join(_cssPath, "ccss.css"), ""],
-                                "v-ele.png" : [path.join(_imgPath, "v-ele.png"), "78e0c29d589eda2c6f73f39c7e40a17d"],
-                                "v-bg.png"  : [path.join(_imgPath, "v-bg.png"), "7740fec92894f014829f8bdf8f2080c9"],
+                                "ccss.css"  : [path.join(_cssPath, "ccss.css"), "ae9fe8ba78aff9dcd693fb302e5bba3f"],
                                 "v-box.png" : [path.join(_imgPath, "v-box.png"), "f134ad0096c184a9bebe56f479a4c94f"],
-                                "h-ele.png" : [path.join(_imgPath, "h-ele.png"), "1e07bfe2cb09b0fa19f6645d7c60a2cc"],
-                                "h-bg.png"  : [path.join(_imgPath, "h-bg.png"), "c59a45a204317e6b3985ca105116868f"],
                                 "h-box.png" : [path.join(_imgPath, "h-box.png"), "221f42ea03a7fdbd42d5cae48fed2b89"]
                             },
-            _total      = 7,
+            _total      = 3,
             _times      = 0;
 
         // 先清除指定文件夹
@@ -42,7 +38,7 @@ describe('abc-main', function() {
         }
 
         // 主程进行
-        child_process.execSync('node abc-main');
+        child_process.execSync('node abc-main-include');
 
         setTimeout(function() {
 
@@ -61,14 +57,9 @@ describe('abc-main', function() {
                         __path  = _pathAndMd5[_filename][0],
                         __md5   = _pathAndMd5[_filename][1];
 
-                    if (_filename === "h-ele.png") {
-
-                        __path = path.join(_imgPath, "h-ele-" + __md5 + ".png");
-                    }
-
                     ab_md5.md5(__path, function(md5) {
 
-                        if (__md5 === md5 || _filename === "ccss.css") { // 由于每次生成 css 都有会不同，所以不作内容判断
+                        if (__md5 === md5) {
 
                             _times++;
 

@@ -1,6 +1,6 @@
 {
   "name": "node-ab-ccss",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "本程序用于生成 css-sprite （图片精灵）的合成图片和对应的 css 文件，并提倡使用**傻瓜式**的使用，适合团队及个人在任何阶段使用，具体请参考 https://github.com/abensu/node-ab-ccss/tree/master/demo",
   "main": "./index.js",
   "keywords": [

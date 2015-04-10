@@ -58,9 +58,9 @@ exports._txt2opt = txt2opt = function(str, imgFold, rootOptObj) {
         while (__index--) {
 
             var
-                __kvList= __paramList[__index].split("="),
-                __key   = ab_trim(__kvList[0]),
-                __val   = ab_trim(__kvList[1]);
+                __kvList    = __paramList[__index].split("="),
+                __key       = ab_trim(__kvList[0]),
+                __val       = ab_trim(__kvList[1]);
 
             if (__key === "pos") {
 
@@ -94,9 +94,9 @@ exports._txt2opt = txt2opt = function(str, imgFold, rootOptObj) {
         }
 
         var
-            __fileData  = ab_getFile(filename).data,
-            __fileBlocks= __fileData.split(/\r\r|\n\n|\r\n\r\n(?:\s*)/g),
-            __subOptObj = {};
+            __fileData      = ab_getFile(filename).data,
+            __fileBlocks    = __fileData.split(/\r\r|\n\n|\r\n\r\n(?:\s*)/g),
+            __subOptObj     = {};
 
         for (var i = 0, len = __fileBlocks.length; i <len; i++) {
 
@@ -143,7 +143,7 @@ exports._txt2opt = txt2opt = function(str, imgFold, rootOptObj) {
 
     // 字符串存在等号则用 字符串操作方式（_func_hashtxt2obj），
     // 否则用 文件操作（_func_file2obj）
-    if (/=/.test(_str)) {
+    if ( /=/.test(_str) ) {
 
         _subOptObj = _func_hashtxt2obj(_str);
 
@@ -200,10 +200,15 @@ exports.operateCssObj = function(opt, tarObj) {
         _bgCsscontent   = '',
         _picIndex       = 0,
         _rPath          = path.relative(_cssFold, _imgFold),
-        _rFile          = path.join(_rPath, _img.replace(_imgFold, '')).replace(/\\/g, "/") + _imgSearch,
+        _rFile          = path.join( _rPath, _img.replace(_imgFold, '') ).replace(/\\/g, "/") + _imgSearch,
         _px             = 0,
         _py             = 0,
-        _rootOptObj     = {"after":null, "css":{}, "pre":null, "pos":null},
+        _rootOptObj     = {
+                                "after" : null,
+                                "css"   : {},
+                                "pre"   : null,
+                                "pos"   : null
+                            },
         _globBgCssObj   = {"background": ""},
         _re_cssCon      = /\s*\{[^\{\}]+\}\s*/g,
         _re_lastDot     = /,\s*$/;
@@ -270,13 +275,13 @@ exports.operateCssObj = function(opt, tarObj) {
      * @param {array} preList           : [] 父代数组
      * @param {array} extendList        : [] 独立外加样式数组
      *
-     * @return {string}             : [] 完整 css 字符串
+     * @return {string}                 : [] 完整 css 字符串
      */
     _func_combine4csstxt = function(baseCls, cssObj, afterList, preList, extendList) {
 
         var
             __str           = "",
-            __baseCls       = (/&&/.test(baseCls)) ? baseCls.split("&&") : "." + baseCls,
+            __baseCls       = ( /&&/.test(baseCls) ) ? baseCls.split("&&") : "." + baseCls,
             __afterList     = afterList,
             __pre           = _func_pre2txt(preList),
             __css           = _func_css2txt(cssObj),
@@ -323,6 +328,7 @@ exports.operateCssObj = function(opt, tarObj) {
 
         // 当压缩选项为 true 时，将所有换行符去掉
         if (_isMinifyCss) {
+
             __str = __str.replace(/\r\n/g, '');
         }
 
@@ -331,12 +337,14 @@ exports.operateCssObj = function(opt, tarObj) {
 
     // 注释 [for _bgCsscontent]
     if (_comment && !_isMinifyCss) {
+
         _bgCsscontent += '/**\r\n * ' + _comment.split("||").join("\r\n * ") + '\r\n */\r\n\r\n';
     }
 
     // 前缀（class/id/tagName） [for _rootOptObj.pre]
     // 文本变数组
     if (_pre) {
+
         _rootOptObj.pre = _pre.split(/\s+/g);
     }
 
@@ -504,7 +512,6 @@ exports.operateCssObj = function(opt, tarObj) {
 
                     // 靠右
                     __optObj.css.height = _heights[_picIndex] + "px";
-                    __optObj.css["background-repeat"] = "no-repeat";
                     __optObj.css["background-position"] = "right -" + _py + "px";
                     __optObj.css["padding-right"] = _widths[_picIndex] + "px";
 
@@ -512,7 +519,6 @@ exports.operateCssObj = function(opt, tarObj) {
 
                     // 一般情况
                     __optObj.css.height = _heights[_picIndex] + "px";
-                    __optObj.css["background-repeat"] = "no-repeat";
                     __optObj.css["background-position"] = "0 -" + _py + "px";
                     __optObj.css["padding-left"] = _widths[_picIndex] + "px";
                 }
@@ -529,25 +535,22 @@ exports.operateCssObj = function(opt, tarObj) {
 
                     // 中部
                     delete __optObj.css.height;
-                    delete __optObj.css.background;
 
                 } else if (__optObj.pos === "right") {
 
                     // 靠右
                     delete __optObj.css.height;
-                    delete __optObj.css.background;
                     delete __optObj.css["padding-right"];
 
                 } else {
 
                     // 一般情况
                     delete __optObj.css.height;
-                    delete __optObj.css.background;
                     delete __optObj.css["padding-left"];
                 }
             }
 
-            _globBgCssObj.background = "url(" + _rFile + ")";
+            _globBgCssObj.background = "url(" + _rFile + ") no-repeat";
 
             break;
 
@@ -571,7 +574,6 @@ exports.operateCssObj = function(opt, tarObj) {
 
                     // 靠下
                     __optObj.css.width = _widths[_picIndex] + "px";
-                    __optObj.css["background-repeat"] = "no-repeat";
                     __optObj.css["background-position"] = "-" + _px + "px bottom";
                     __optObj.css["padding-bottom"] = _heights[_picIndex] + "px";
 
@@ -579,7 +581,6 @@ exports.operateCssObj = function(opt, tarObj) {
 
                     // 一般情况
                     __optObj.css.width = _widths[_picIndex] + "px";
-                    __optObj.css["background-repeat"] = "no-repeat";
                     __optObj.css["background-position"] = "-" + _px + "px 0";
                     __optObj.css["padding-top"] = _heights[_picIndex] + "px";
                 }
@@ -596,25 +597,22 @@ exports.operateCssObj = function(opt, tarObj) {
 
                     // 中部
                     delete __optObj.css.width;
-                    delete __optObj.css.background;
 
                 } else if (__optObj.pos === "bottom") {
 
                     // 靠下
                     delete __optObj.css.width;
-                    delete __optObj.css.background;
                     delete __optObj.css["padding-bottom"];
 
                 } else {
 
                     // 一般情况
                     delete __optObj.css.width;
-                    delete __optObj.css.background;
                     delete __optObj.css["padding-top"];
                 }
             }
 
-            _globBgCssObj.background = "url(" + _rFile + ")";
+            _globBgCssObj.background = "url(" + _rFile + ") no-repeat";
 
             break;
 
@@ -626,15 +624,36 @@ exports.operateCssObj = function(opt, tarObj) {
             break;
     }
 
-    _bgCsscontent += _norCsscontent.replace(_re_cssCon, ",\r\n").replace(_re_lastDot, '') + " {" + _func_css2txt(_globBgCssObj) + "}\r\n";
-    _isMinifyCss && (_bgCsscontent = _bgCsscontent.replace(/\r\n/g, ""));
+    _bgCsscontent
+        += _norCsscontent
+                .replace(_re_cssCon, ",\r\n")
+                .replace(_re_lastDot, '')
+        + " {"
+        + _func_css2txt(_globBgCssObj)
+        + "}\r\n";
+
+    if (_isMinifyCss) {
+
+        _bgCsscontent = _bgCsscontent
+                            .replace(/\r\n/g, "")
+                            .replace(/\s+\{/g, "{")
+                            .replace(/;\}/g, "}");
+
+        _norCsscontent = _norCsscontent
+                            .replace(/\s+\{/g, "{")
+                            .replace(/;\}/g, "}");
+    }
+
     _norCsscontent = _bgCsscontent + _norCsscontent;
 
     // 当还有 css 块时，添加换行，
     // 到最后，将最后的换行符去掉
     if (tarObj[_css]) {
-        tarObj[_css] += ((_isMinifyCss) ? "" : "\r\n\r\n\r\n") + _norCsscontent.replace(/\r\n$/, "");
+
+        tarObj[_css] += ( (_isMinifyCss) ? "" : "\r\n\r\n\r\n" ) + _norCsscontent.replace(/\r\n$/, "");
+
     } else {
+
         tarObj[_css] = _norCsscontent.replace(/\r\n$/, "");
     }
 };

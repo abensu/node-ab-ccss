@@ -81,6 +81,7 @@ exports.createImg = function (opt, taskIndex) {
          * 水平排列的独立图片
          */
         case "h-ele" :
+
             _newImg = images(_totalWidth + (_len - 1) * _sep, _maxHeight);
             _bgImg  = images(_totalWidth + (_len - 1) * _sep, _maxHeight);
 
@@ -108,6 +109,7 @@ exports.createImg = function (opt, taskIndex) {
          * 垂直排列的独立图片
          */
         case "v-ele" :
+
             _newImg = images(_maxWidth, _totalHeight + (_len - 1) * _sep);
             _bgImg  = images(_maxWidth, _totalHeight + (_len - 1) * _sep);
 
@@ -135,10 +137,12 @@ exports.createImg = function (opt, taskIndex) {
          * 水平平铺的背景
          */
         case "h-bg" :
+
             _newImg = images(_maxWidth, _totalHeight + (_len - 1) * _sep);
             _bgImg  = images(_maxWidth, _totalHeight + (_len - 1) * _sep);
 
             while(_index < _len) {
+
                 // _newImg = _newImg.draw(_images[_index].width(_maxWidth), _px, _py); // 主程调用，拼接图片
                 _newImg = _newImg.draw(images(_imagesPath[_index]).width(_maxWidth), _px, _py); // 子程调用，拼接图片
                 _index ++;
@@ -150,10 +154,12 @@ exports.createImg = function (opt, taskIndex) {
          * 垂直平铺的背景
          */
         case "v-bg" :
+
             _newImg = images(_totalWidth + (_len - 1) * _sep, _maxHeight);
             _bgImg  = images(_totalWidth + (_len - 1) * _sep, _maxHeight);
 
             while(_index < _len) {
+
                 // _newImg = _newImg.draw(_images[_index].height(_maxHeight), _px, _py); // 主程调用，拼接图片
                 _newImg = _newImg.draw(images(_imagesPath[_index]).height(_maxHeight), _px, _py); // 子程调用，拼接图片
                 _index ++;
@@ -165,19 +171,23 @@ exports.createImg = function (opt, taskIndex) {
          * 水平嵌套的背景
          */
         case "h-box" :
+
             _newImg = images(_maxWidth, _totalHeight + (_len - 1) * _sep);
             _bgImg  = images(_maxWidth, _totalHeight + (_len - 1) * _sep);
 
             while(_index < _len) {
+
                 var __w = _widths[_index];
 
                 // 中部左右拉伸，仅当宽度不足时
                 if (_cssOptObj[_index].pos === "middle") {
+
                     __w = (__w !== _maxWidth) ? _maxWidth : __w;
                 }
 
                 // 靠右
                 if (_cssOptObj[_index].pos === "right") {
+
                     _px = _maxWidth - _widths[_index];
                 }
 
@@ -193,6 +203,7 @@ exports.createImg = function (opt, taskIndex) {
          * 垂直嵌套的背景
          */
         case "v-box" :
+
             _newImg = images(_totalWidth + (_len - 1) * _sep, _maxHeight);
             _bgImg  = images(_totalWidth + (_len - 1) * _sep, _maxHeight);
 
@@ -201,11 +212,13 @@ exports.createImg = function (opt, taskIndex) {
 
                 // 中部上下拉伸，仅当宽度不足时
                 if (_cssOptObj[_index].pos === "middle") {
+
                     __h = (__h !== _maxHeight) ? _maxHeight : __h;
                 }
 
                 // 靠下
                 if (_cssOptObj[_index].pos === "bottom") {
+
                     _py = _maxHeight - _heights[_index];
                 }
 
@@ -234,6 +247,7 @@ exports.createImg = function (opt, taskIndex) {
         switch(ab_getType(_opt.mutilExportImg)) {
 
             case "array" :
+
                 for (var __i = _opt.mutilExportImg.length; __i--;) {
 
                     var __imgPath = path.join(_imgFold, _opt.mutilExportImg[__i]);
@@ -252,6 +266,7 @@ exports.createImg = function (opt, taskIndex) {
                 break;
 
             case "string" :
+
                 var __imgPath = path.join(_imgFold, _opt.mutilExportImg);
 
                 _re_imgType.lastIndex = 0;
@@ -284,6 +299,7 @@ exports.createImg = function (opt, taskIndex) {
 
             // 当为子程时调用
             if (cluster.isWorker) {
+
                 console.log("level 2 => id : " + cluster.worker.id + " => 生成 : " + _img);
                 process.send({status:2, msg:"finish", taskIndex: taskIndex, md5: md5}); // 返回信息给子程主程（level 3）
             }

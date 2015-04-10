@@ -1,0 +1,4 @@
+﻿../abc-test-src/v-box
+    /images/v-box.png
+    /css/ccss.css
+    {"type":"v-box", "sep":0, "comment":"v-box 注释"}

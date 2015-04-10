@@ -27,7 +27,7 @@ exports.extend = function() {
             continue;
         }
 
-        _parentObj = _J.parse(_J.stringify(_arg)); // 通过 json 的编译和解析，获得一个新对象
+        _parentObj = _J.parse( _J.stringify(_arg) ); // 通过 json 的编译和解析，获得一个新对象
 
         for(var _key in _parentObj) {
 
