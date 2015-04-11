@@ -9,8 +9,8 @@
 /**
  * 将目录文本转换成处理对象
  *
- * @use {function} txt2opt(root)
- * @use {function} txt2opt(root, path1, path2, ...)
+ * @example : txt2opt(root)
+ * @example : txt2opt(root, path1, path2, ...)
  *
  * @param {string} root     : [] 根目录
  * @param {string} path(n)  : [] 目录/文件名（第 1 个之后的参数）
@@ -25,9 +25,7 @@
  *                              |                   "css"   : ...,  // "合成 css 的路径"
  *                              |                   "opt"   : ...   // "实际操作参数对象"
  *                              |               }, ...]
- *                              |   }
- *                              |
- *                              `- null : 文件不存在
+ *                              `   }
  */
 
 exports.txt2opt = function(root) {

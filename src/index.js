@@ -21,7 +21,12 @@ var
 /**
  * 主函数
  *
+ * @example : main("root", "path", "text")
+ *
  * @param {string} pathTxt : [] 目录/文件名
+ * @param {string} optType : [] 处理类型（最后的参数）
+ *                              |- "text" : 文本处理方式
+ *                              `- "json" : json 处理方式
  */
 
 function main() {
